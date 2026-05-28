@@ -64,87 +64,163 @@ main {
 }
 
 .task-container {
-    max-width: 400px;
-    margin: 20px auto;
-    padding: 20px;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    font-family: Arial, sans-serif;
+    max-width: 450px;
+    margin: 40px auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    font-family: 'Segoe UI', Arial, sans-serif;
 }
 
 h2 {
     text-align: center;
     color: #333;
+    margin-bottom: 25px;
+    font-size: 24px;
 }
 
-/* Estilo do Formulário de Input */
 .task-form {
     display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.input-group {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 #taskInput {
-    flex-grow: 1;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+    outline: none;
 }
 
-#addBtn {
-    padding: 10px 15px;
+#taskInput:focus {
+    border-color: #4a90d9;
+}
+
+#taskInput.error {
+    border-color: #dc3545;
+    animation: shake 0.3s ease-in-out;
+}
+
+.error-message {
+    color: #dc3545;
+    font-size: 12px;
+    margin-top: 5px;
+    display: none;
+    padding-left: 5px;
+}
+
+#taskInput.error + .error-message {
+    display: block;
+}
+
+.add-btn {
+    padding: 12px 20px;
     background-color: #28a745;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 110px;
+    transition: background-color 0.3s ease;
 }
 
-#addBtn:hover {
+.add-btn:hover {
     background-color: #218838;
 }
 
-/* Estilo dos Filtros */
+.add-btn:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+.spinner {
+    display: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #ffffff;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+.add-btn.loading #btnText {
+    display: none;
+}
+
+.add-btn.loading #btnSpinner {
+    display: block;
+}
+
 .filter-container {
     display: flex;
     justify-content: center;
-    gap: 5px;
-    margin-bottom: 15px;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
 }
 
 .filter-btn {
-    padding: 5px 10px;
+    padding: 8px 16px;
     border: 1px solid #ddd;
     background: #f8f9fa;
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: 20px;
+    font-size: 13px;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+    background: #e9ecef;
 }
 
 .filter-btn.active {
-    background-color: #007bff;
+    background-color: #4a90d9;
     color: white;
-    border-color: #007bff;
+    border-color: #4a90d9;
 }
 
-/* Estilo da Lista de Tarefas */
 #taskList {
     list-style: none;
     padding: 0;
+    margin-top: 10px;
 }
 
 .task-item {
-    background: #f9f9f9;
-    border-bottom: 1px solid #eee;
-    padding: 10px;
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    padding: 15px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 5px;
-    border-radius: 4px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
 }
 
-/* Estilo quando está Concluída */
+.task-item:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.task-item.completed {
+    background: #f0f8f0;
+    border-color: #d4edda;
+}
+
 .task-item.completed .task-text {
     text-decoration: line-through;
     color: #888;
@@ -153,17 +229,35 @@ h2 {
 .task-text {
     cursor: pointer;
     flex-grow: 1;
+    padding: 5px 10px;
+    word-break: break-word;
 }
 
 .delete-btn {
-    background: #dc3545;
-    color: white;
-    border: none;
-    padding: 5px 8px;
-    border-radius: 4px;
+    background: transparent;
+    color: #dc3545;
+    border: 1px solid #dc3545;
+    padding: 6px 12px;
+    border-radius: 6px;
     cursor: pointer;
     font-size: 12px;
     margin-left: 10px;
+    transition: all 0.3s ease;
+}
+
+.delete-btn:hover {
+    background: #dc3545;
+    color: white;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
 }
 
 footer {

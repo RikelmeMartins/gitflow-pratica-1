@@ -24,17 +24,24 @@
     <main>
         <div class="task-container">
             <h2>Minhas Tarefas</h2>
-
+            
             <div class="task-form">
-                <input type="text" id="taskInput" placeholder="Digite uma nova tarefa...">
-                <button id="addBtn">Adicionar</button>
+                <div class="input-group">
+                    <input type="text" id="taskInput" placeholder="Digite uma nova tarefa...">
+                    <span class="error-message" id="errorMessage">Este campo não pode esta vazio!</span>
+                </div>
+                <button id="addBtn" class="add-btn">
+                    <span id="btnText">Adicionar</span>
+                    <span class="spinner" id="btnSpinner"></span>
+                </button>
             </div>
 
-        <div class="filter-container">
-            <button class="filter-btn active" data-filter="all">Todas</button>
-            <button class="filter-btn" data-filter="pending">Pendentes</button>
-            <button class="filter-btn" data-filter="completed">Concluídas</button>
-        </div>
+            <div class="filter-container">
+                <button class="filter-btn active" data-filter="all">Todas</button>
+                <button class="filter-btn" data-filter="pending">Pendentes</button>
+                <button class="filter-btn" data-filter="completed">Concluídas</button>
+            </div>
+
             <ul id="taskList">
             <!-- As tarefas serão inseridas aqui pelo JavaScript -->
             </ul>

@@ -21,40 +21,24 @@
         </div>
     </header>
 
-    <!-- MAIN -->
     <main>
-        <div class="main-header">
-            <h1 class="main-title">Suas Tarefas</h1>
-            <p class="task-counter">2 tarefas pendentes • Prioridade alta</p>
-        </div>
+        <div class="task-container">
+            <h2>Minhas Tarefas</h2>
 
-        <div class="tasks-grid">
-            <!-- Tarefa 1 -->
-            <div class="task-card">
-                <h2 class="task-title">Desenvolver Landing Page</h2>
-                <p class="task-description">
-                    Criar uma landing page responsiva com design moderno usando HTML, CSS e JavaScript. 
-                    Incluir animações suaves e formulário de contato funcional.
-                </p>
-                <div class="task-meta">
-                    <span class="task-priority priority-high">Alta</span>
-                    <span>📅 15/12/2024</span>
-                </div>
+            <div class="task-form">
+                <input type="text" id="taskInput" placeholder="Digite uma nova tarefa...">
+                <button id="addBtn">Adicionar</button>
             </div>
 
-            <!-- Tarefa 2 -->
-            <div class="task-card">
-                <h2 class="task-title">Otimizar Performance do Site</h2>
-                <p class="task-description">
-                    Implementar lazy loading, otimizar imagens, minificar CSS/JS e melhorar Core Web Vitals. 
-                    Meta: Lighthouse score > 90 em todas as métricas.
-                </p>
-                <div class="task-meta">
-                    <span class="task-priority priority-medium">Média</span>
-                    <span>📅 20/12/2024</span>
-                </div>
-            </div>
+        <div class="filter-container">
+            <button class="filter-btn active" data-filter="all">Todas</button>
+            <button class="filter-btn" data-filter="pending">Pendentes</button>
+            <button class="filter-btn" data-filter="completed">Concluídas</button>
         </div>
+            <ul id="taskList">
+            <!-- As tarefas serão inseridas aqui pelo JavaScript -->
+            </ul>
+        </div>        
     </main>
 
     <!-- FOOTER -->
@@ -81,5 +65,7 @@
             <p>&copy; 2024 TaskMaster. Todos os direitos reservados.</p>
         </div>
     </footer>
+    
+    <script src="script.js"></script>
 </body>
 </html>

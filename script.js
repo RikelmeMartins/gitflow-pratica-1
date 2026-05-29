@@ -3,19 +3,51 @@ const addBtn = document.getElementById('addBtn');
 const taskList = document.getElementById('taskList');
 const errorMessage = document.getElementById('errorMessage');
 const filterBtns = document.querySelectorAll('.filter-btn');
+const themeToggle = document.getElementById('themeToggle');
+const htmlElement = document.documentElement;
 
 let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+l
 let currentFilter = 'all';
+
+function initTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    if (savedTheme) {
+        applyTheme(savedTheme);
+    } else if (systemPrefersDark) {
+        applyTheme('dark');
+    } else {
+        applyTheme('light');
+    }
+}
+
+function applyTheme(theme) {
+    if (theme === 'dark') {
+        htmlElement.setAttribute('data-theme', 'dark');
+    } else {
+        htmlElement.removeAttribute('data-theme');
+    }
+    localStorage.setItem('theme', theme);
+}
+
+function toggleTheme() {
+    const currentTheme = htmlElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    applyTheme(newTheme);
+}
 
 function addTask() {
     const text = taskInput.value.trim();
-
+    
     if (text === '') {
         showError();
         return;
     }
 
     hideError();
+
     showLoading(true);
 
     setTimeout(() => {
@@ -27,9 +59,8 @@ function addTask() {
 
         tasks.push(newTask);
         saveAndRender();
-
+        
         taskInput.value = '';
-
         showLoading(false);
     }, 500);
 }
@@ -60,7 +91,6 @@ function saveAndRender() {
 
 function renderTasks(filter) {
     taskList.innerHTML = '';
-    
     const filteredTasks = tasks.filter(task => {
         if (filter === 'all') return true;
         return task.status === filter;
@@ -68,7 +98,7 @@ function renderTasks(filter) {
 
     if (filteredTasks.length === 0) {
         const emptyMessage = document.createElement('li');
-        emptyMessage.style.cssText = 'text-align: center; color: #888; padding: 20px; font-style: italic;';
+        emptyMessage.className = 'empty-message';
         emptyMessage.textContent = filter === 'all' ? 'Nenhuma tarefa cadastrada!' : 
                                    filter === 'pending' ? 'Nenhuma tarefa pendente!' : 
                                    'Nenhuma tarefa concluída!';
@@ -130,4 +160,7 @@ filterBtns.forEach(btn => {
     btn.addEventListener('click', handleFilterClick);
 });
 
+themeToggle.addEventListener('click', toggleTheme);
+
+initTheme();
 renderTasks('all');
